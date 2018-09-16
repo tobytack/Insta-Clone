@@ -1,9 +1,9 @@
 <div class="container">
 
-  <h1>つぶやき一覧</h1>
+  <h1>Pictures</h1>
   
   <div id="new-blog-link">
-    <%= link_to '新規つぶやきを作成する', new_blog_path, class: 'btn btn-info btn-lg' %>
+    <%= link_to 'Post New Picture', new_blog_path, class: 'btn btn-info btn-lg' %>
   </div>
   
   <br>
@@ -16,15 +16,16 @@
     
       <div class="container-fluid">
         <ul class="row">
-          <li class="col-lg-2.4"><%= blog.content %></li>
+          <li class="col-lg-2.4">Contributor: <%= blog.user.name%></li>
+          <li class="col-lg-2.4">Coment: <%= blog.content %></li>
           <li class="col-lg-2.4"><%= image_tag blog.image.to_s %></li>
         
           <% if blog.user == current_user %>
-            <li class="col-lg-2.4"><%= link_to '　詳細を確認する　', blog_path(blog.id), class: 'btn btn-default'  %></li>
-            <li class="col-lg-2.4"><%= link_to 'つぶやきを編集する', edit_blog_path(blog.id), class: 'btn btn-primary' %></li>
-            <li class="col-lg-2.4"><%= link_to 'つぶやきを削除する', blog_path(blog.id), method: :delete ,data: { confirm: '本当に削除していいですか？' }, class: 'btn btn-danger' %></li> 
+            <li class="col-lg-2.4"><%= link_to 'Details', blog_path(blog.id), class: 'btn btn-default'  %></li>
+            <li class="col-lg-2.4"><%= link_to 'Edit Post', edit_blog_path(blog.id), class: 'btn btn-primary' %></li>
+            <li class="col-lg-2.4"><%= link_to 'Erase Post', blog_path(blog.id), method: :delete ,data: { confirm: '本当に削除していいですか？' }, class: 'btn btn-danger' %></li> 
           <% else %>
-            <li class="col-lg-2.4"><%= link_to '　詳細を確認する　', blog_path(blog.id), class: 'btn btn-default'  %></li>
+            <li class="col-lg-2.4"><%= link_to 'Details', blog_path(blog.id), class: 'btn btn-default'  %></li>
           <% end %>
           
         </ul>    

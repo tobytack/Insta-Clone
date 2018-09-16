@@ -2,7 +2,7 @@ class Blog < ApplicationRecord
     mount_uploader :image, ImageUploader
     validates :content, presence: true, length: { maximum: 140 }
     
-    belongs_to :user, optional: true
+    belongs_to :user
     validates :user_id, presence: true
     
     has_many :favorites, dependent: :destroy

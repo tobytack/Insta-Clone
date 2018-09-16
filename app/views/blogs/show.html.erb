@@ -1,6 +1,6 @@
-<h1>つぶやき詳細画面</h1>
+<h1>Details</h1>
 
-<p>内容: <%= @blog.content %></p>
+<p>Content: <%= @blog.content %></p>
 
 <p>
   <strong>Image:</strong>
@@ -9,10 +9,10 @@
 
 <% unless @blog.user == current_user %>
   <% if @favorite.present? %>
-    <%= link_to 'お気に入り解除する', favorite_path(id: @favorite.id), method: :delete, class: 'btn btn-danger' %>
+    <%= link_to 'Cancel Favorite', favorite_path(id: @favorite.id), method: :delete, class: 'btn btn-danger' %>
   <% else %>
-    <%= link_to 'お気に入りにする', favorites_path(blog_id: @blog.id), method: :post, class: 'btn btn-primary' %>
+    <%= link_to 'To Favorite', favorites_path(blog_id: @blog.id), method: :post, class: 'btn btn-primary' %>
   <% end %>
 <% end %>
 
-<%= link_to "つぶやき一覧画面にもどる", blogs_path, class: 'btn btn-primary' %>
+<%= link_to "Back To Index", blogs_path, class: 'btn btn-primary' %>
