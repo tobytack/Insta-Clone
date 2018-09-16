@@ -1,7 +1,7 @@
 <%= form_with(model: @blog, local: true ,url: choose_new_or_edit ) do |form| %>
   <% if @blog.errors.any? %>
     <div id="error_explanation">
-      <h2><%= @blog.errors.count %>Error(s) occurred</h2>
+      <h2><%= @blog.errors.count %>件のエラーがあります。</h2>
       <ul>
 
       <% @blog.errors.full_messages.each do |msg| %>
@@ -16,7 +16,26 @@
     <%= form.text_field :content %>
     <%= form.hidden_field :user_id, value: current_user.id %>
   </div>
+  
+  <div class="blog_title">
+    
+    <%= form.file_field :image, class: "fileInput",style: "display:none;", id: :blog_image  %>
+
+  </div> 
+  
+  <div class="input-group">
+    <input type="text" id="image" class="form-control" placeholder="select file...">
+    <span class="input-group-btn"><button type="button" class="btn btn-info" onclick="$('input[id=blog_image]').click();">Browse</button></span>
+  </div>
+  <p>jpg,jpeg,gif,png only</p>
+
+  <script>
+    $('input[id=blog_image]').change(function() {
+      $('#image').val($(this).val().replace("C:\\fakepath\\", ""));
+    });
+  </script>
+  
   <%= form.submit %>
 <% end %>
 
-<%= link_to 'Back Index', blogs_path,  class: 'btn btn-primary' %>
+<%= link_to 'つぶやき一覧画面にもどる', blogs_path,  class: 'btn btn-primary' %>

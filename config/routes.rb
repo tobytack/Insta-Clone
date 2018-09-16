@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :feeds
   root to: 'blogs#top'
 
   resources :sessions, only: [:new, :create, :destroy]

@@ -2,6 +2,11 @@
 
 <p>E-Mail Adress: <%= @user.email %></p>
 
+<p>
+  <strong>Image:</strong>
+  <%= image_tag(@user.image) %>
+</p>
+
 <h2>List Of Favorite Blogs</h2>
 
     <% @favorite_blogs.each do |favorite| %>
