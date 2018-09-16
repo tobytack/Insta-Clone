@@ -1,0 +1,14 @@
+<h3>Sure?</h3>
+
+<%= form_with(model: @blog, url: blogs_path, local: true) do |form| %>
+  <%= form.hidden_field :content %>
+
+  <p>Content:<%= @blog.content %></p>
+  <%= form.hidden_field :user_id, value: current_user.id %>
+  <%= form.submit  "Create" %>
+<% end %>
+
+<%= form_with(model: @blog, url: new_blog_path, local: true, method: 'get') do |form| %>
+  <%= form.hidden_field :content %>
+  <%= form.submit "Back", name: ' back ' %>
+<% end %>

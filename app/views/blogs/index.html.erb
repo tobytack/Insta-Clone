@@ -1,0 +1,34 @@
+<div class="container">
+
+  <h1>Index</h1>
+  
+  <div id="new-blog-link">
+    <%= link_to 'Create New Blog', new_blog_path, class: 'btn btn-info btn-lg' %>
+  </div>
+  
+  <br>
+  
+  <p><%= notice %></p>
+
+  <nav class="row">
+
+    <% @blogs.each do |blog| %>
+    
+      <div class="container-fluid">
+        <ul class="row">
+          <li class="col-lg-3"><%= blog.content %></li>
+        
+          <% if blog.user == current_user %>
+            <li class="col-lg-3"><%= link_to '　Detail　', blog_path(blog.id), class: 'btn btn-default'  %></li>
+            <li class="col-lg-3"><%= link_to 'Edit', edit_blog_path(blog.id), class: 'btn btn-primary' %></li>
+            <li class="col-lg-3"><%= link_to 'Erase', blog_path(blog.id), method: :delete ,data: { confirm: '本当に削除していいですか？' }, class: 'btn btn-danger' %></li> 
+          <% else %>
+            <li class="col-lg-3"><%= link_to '　Detail　', blog_path(blog.id), class: 'btn btn-default'  %></li>
+          <% end %>
+          
+        </ul>    
+      </div>
+    <% end %>
+  </nav>
+
+</div>

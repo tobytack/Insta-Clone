@@ -1,0 +1,22 @@
+<%= form_with(model: @blog, local: true ,url: choose_new_or_edit ) do |form| %>
+  <% if @blog.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= @blog.errors.count %>Error(s) occurred</h2>
+      <ul>
+
+      <% @blog.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="blog_title">
+    <%= form.label :content %>
+    <%= form.text_field :content %>
+    <%= form.hidden_field :user_id, value: current_user.id %>
+  </div>
+  <%= form.submit %>
+<% end %>
+
+<%= link_to 'Back Index', blogs_path,  class: 'btn btn-primary' %>
