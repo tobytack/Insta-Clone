@@ -20,8 +20,14 @@ class BlogsController < ApplicationController
     @blog = Blog.new(blog_params)
     @blog.user_id = current_user.id #現在ログインしているuserのidをblogのuser_idカラムに挿入する
     if @blog.save
+      
+       @user = current_user
+       # deliverメソッドを使って、メールを送信する
+       ContactMailer.contact_mail(@user).deliver
+       
        # 一覧画面へ遷移して"つぶやきを作成しました！"とメッセージを表示します。
-       redirect_to blogs_path, notice: "You Created New Blog!"
+       redirect_to blogs_path, notice: "つぶやきを作成しました！"
+       
     else
        # 入力フォームを再描画します。
        render 'new'
@@ -45,7 +51,7 @@ class BlogsController < ApplicationController
   
   def update
     if @blog.update(blog_params)
-       redirect_to blogs_path, notice: "You Edited Blog!"
+       redirect_to blogs_path, notice: "つぶやきを編集しました！"
     else
       render 'edit'
     end
@@ -53,14 +59,14 @@ class BlogsController < ApplicationController
   
   def destroy
     @blog.destroy
-    redirect_to blogs_path, notice:"You Erased Blog!"
+    redirect_to blogs_path, notice:"つぶやきを削除しました！"
   end
 
   private
   
   def require_login
     unless logged_in?
-      flash[:notice] = 'Please Login'
+      flash[:notice] = 'Log in してください'
       redirect_to new_session_path
     end
   end  
